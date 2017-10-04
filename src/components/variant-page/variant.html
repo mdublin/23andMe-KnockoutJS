@@ -1,0 +1,169 @@
+<!-- overriding some Boostrap CSS for dropdown menu configuration (placement and adding scrollbar) -->
+
+<style>
+	.dropdown-menu {
+		top: 0;
+		left: 100%;
+	}
+
+	.scrollable-menu {
+		height: auto;
+		max-height: 250px;
+		overflow-x: hidden;
+	}
+
+
+	.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+
+</style>
+
+
+<!-- http://getbootstrap.com/css/#grid-example-basic -->
+<!-- using initial-hide to prevent flicker effect of page elements momentarily appearing if unauthorized access to view attempted -->
+<div class="container initial-hide" id="parentDiv">
+
+	<div class="alert alert-success alert-dismissible" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <strong>Info: </strong> A variant, or allele, is a possible variation at a genetic locus or region on a chromosome. The set of variants at a locus may be denoted by a particular marker. Variant data correlates to the GRCh37 human reference genome.</div>
+
+	<h2> Select a query </h2>
+
+
+	<div class="row">
+		<div class="col-md-4">
+
+			<div class="btn-group-vertical">
+
+				<!-- accession ID selection button -->
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Accession ID <i class="icon icon-caret-right"></i>
+  </button>
+					<ul class="dropdown-menu scrollable-menu" role="menu" data-bind="foreach: accessionidsArray">
+						<li>
+							<a class="selectedaccessionid" data-bind="text: accessionId"></a>
+						</li>
+					</ul>
+				</div>
+
+				<!-- chromosome number selection button -->
+				<div class="btn-group">
+					<button type="button" class="btn btn-success btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Chromosome <span class="caret"></span>
+  </button>
+					<ul class="dropdown-menu scrollable-menu" role="menu" data-bind="foreach: chromosomesArray">
+						<li>
+							<a class="selectedchromosomeid" data-bind="text: chromosomeID"></a>
+						</li>
+					</ul>
+				</div>
+
+        <button type="button" id="genenamebtn" class="btn btn-warning">Gene name</button>
+
+				<!-- gene name selection button
+				<div class="btn-group">
+					<button type="button" class="btn btn-warning btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Gene Name <span class="caret"></span>
+  </button>
+					<ul class="dropdown-menu">
+						<li><a href="#">Action</a></li>
+						<li><a href="#">Another action</a></li>
+						<li><a href="#">Something else here</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="#">Separated link</a></li>
+					</ul>
+				</div>
+-->
+
+			</div>
+		</div>
+
+		<div class="col-md-8">
+
+			<div class="alert alert-info alert-dismissible fade in initial-hide" role="alert" id="searchInterface">
+			<!--	<button type="button" class="close" data-dismiss="alert" aria-label="Close">...</button> -->
+
+			<div class="form-group" id="genenamesearchfield">
+			<!--	<label for="genename">gene name:</label> -->
+				<h4>Gene Name: </h4>
+				<input type="text" class="form-control" id="genenamefield" placeholder="enter gene name">
+			</div>
+
+				<h4 data-bind="text: selectedChoice"></h4>
+				<h4 data-bind="text: selectedParams"></h4>
+				<button type="button" id="searchBtn" class="btn btn-success">search</button>
+				<button class="btn btn-warning" id="loadingBtn"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</button>
+				<div class="btn-group">
+					<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">add parameters</button>
+					<ul class="dropdown-menu">
+						<li><a href="#">start</a></li>
+						<li><a href="#">end</a></li>
+						<li class="dropdown-submenu">
+            <a class="test" href="#">platform label <span class="caret"></span></a>
+            <ul class="dropdown-menu" data-bind="foreach: platformlabels">
+              <li><a class="selectedlabel" data-bind="text: label"></a></li>
+            </ul>
+          </li>
+					</ul>
+				</div>
+				<button type="button" id="clearBtn" class="btn btn-danger pull-right">clear</button>
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<div class="alert alert-danger alert-dismissible fade in initial-hide" role="alert" id="noresultsalert">
+	  <h4>There was a problem with 23andMe's API resources when responding to this request.</h4>
+			<p>Please try another query.</p>
+	</div>
+
+	<ul class = "pager">
+    <li class="previous" id="prevBtn"><a href="#">&larr; Previous</a></li>
+    <li class="next"id="nextBtn" ><a href="#">Next &rarr;</a></li>
+ </ul>
+
+  <!-- results accordion div loop -->
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" data-bind="foreach: resultsArray">
+
+	  <div class="panel panel-primary">
+	    <div class="panel-heading" role="tab" data-bind="attr: { 'id': 'heading' + $index() }">
+	      <h4 class="panel-title">
+	        <a role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" data-bind="text: resultsNumber, attr: { 'id': 'heading' + $index(), 'href': '#collapse' + $index(), 'aria-controls': 'collapse' + $index() }">
+					</a>
+	      </h4>
+	    </div>
+	    <div class="panel-collapse collapse" role="tabpanel" data-bind="attr: { 'id': 'collapse' + $index(), 'aria-labelledby': 'heading' + $index() }">
+
+				<div class="panel-body">
+					  <p><strong>Accession ID:</strong> <span data-bind="text: accession_id"></span></p>
+				</div>
+	      <div class="panel-body">
+					  <p><strong>Allele:</strong> <span data-bind="text: allele"></span></p>
+				</div>
+				<div class="panel-body">
+					<p><strong>Start:</strong> <span data-bind="text: start"></span></p>
+				</div>
+				<div class="panel-body">
+					<p><strong>End:</strong> <span data-bind="text: end"></span></p>
+				</div>
+
+	    </div>
+	  </div>
+	</div>
+
+</div> <!-- end of parent container div -->

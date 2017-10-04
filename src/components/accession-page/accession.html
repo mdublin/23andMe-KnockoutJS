@@ -1,0 +1,191 @@
+
+<!-- using initial-hide to prevent flicker effect of page elements momentarily appearing if unauthorized access to view attempted -->
+<div class="container initial-hide" id="parentDiv">
+
+  <!--  <div class="container-fluid"> -->
+
+      <div class="alert alert-success alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>Info: </strong> 23andMe uses the NCBI build 37 reference assembly. This is a set of standardized reference sequences where each accession corresponds to a chromosome (1-22, X, Y, & Mitochondrial). These endpoints will provide high-level
+          reference data about the accession. For more in-depth exploration of the reference genome sequences, download seqseek and use Build 37.
+      </div>
+
+        <button type="button" id="testaccession" class="btn btn-primary btn-responsive">Load Accession Data</button>
+
+        <button type="button" data-toggle="modal" href="#normalModal" id="viewRawServerResponse" class="btn btn-success btn-responsive initial-hide">View Raw Server Response Data</button>
+
+        <div id="normalModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 id="h4test" class="modal-title">Raw server response</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><span id="serverResponseContent" data-bind="text: rawServerResponse"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" data-clipboard-target="#serverResponseContent" id="copyToClipboard" class="btn btn-info">Copy</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <!--
+    <div id="jsoninsert4"></div>
+    -->
+        <br></br>
+
+        <div class="container-fluid" id="chromosomediv">
+
+            <div class="row">
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/1.png" id="chromosome_1" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/2.png" id="chromosome_2" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/3.png" id="chromosome_3" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/4.png" id="chromosome_4" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/5.png" id="chromosome_5" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/6.png" id="chromosome_6" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/7.png" id="chromosome_7" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/8.png" id="chromosome_8" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/9.png" id="chromosome_9" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/10.png" id="chromosome_10" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/11.png" id="chromosome_11" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/12.png" id="chromosome_12" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/13.png" id="chromosome_13" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/14.png" id="chromosome_14" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/15.png" id="chromosome_15" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/16.png" id="chromosome_16" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/17.png" id="chromosome_17" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/18.png" id="chromosome_18" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/19.png" id="chromosome_19" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/20.png" id="chromosome_20" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/21.png" id="chromosome_21" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/22.png" id="chromosome_22" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#myModal" /></a>
+                </div>
+                <div class="col-xs-6 col-md-1">
+                    <a href="" target="_blank" id="chrom1"><img class="img-responsive" src="/images/23.png" id="chromosome_23" data-bind="click: incrementClickCounter" data-toggle="modal" data-target="#xyModal" /></a>
+                </div>
+            </div>
+
+
+
+            <!-- Button trigger modal -->
+            <!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Launch demo modal</button> -->
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Chromsome <span data-bind="text: chromosome"></span></h4>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>ID:</strong> <span data-bind="text: chromosome_id"></span></p>
+                            <p><strong>Length:</strong> <span data-bind="text: chromosome_length"></span></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+
+            <!-- just for XY chromosome -->
+            <div class="modal fade" id="xyModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Chromsome X</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>ID:</strong> <span data-bind="text: Xchromosome_id"></span></p>
+                            <p><strong>Length:</strong> <span data-bind="text: Xchromosome_length"></span></p>
+                        </div>
+                        <div class="modal-header">
+                            <h4 class="modal-title">Chromsome Y</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>ID:</strong> <span data-bind="text: Ychromosome_id"></span></p>
+                            <p><strong>Length:</strong> <span data-bind="text: Ychromosome_length"></span></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+
+            <!-- chromosomediv closing div -->
+        </div>
+
+  <!-- </div> -->
+
+</div>
+
+<!-- overriding Bootstrap CSS styling for modals wherein scroll bars are hidden upon modal open
+<style>
+.modal-open {
+    overflow: scroll;
+}
+</style>
+-->

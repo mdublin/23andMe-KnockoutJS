@@ -1,0 +1,70 @@
+
+<!-- using initial-hide to prevent flicker effect of page elements momentarily appearing if unauthorized access to view attempted -->
+<div class="container initial-hide" id="parentDiv">
+
+
+	<div class="alert alert-success alert-dismissible" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <strong>Info: </strong> A marker is an identifier for multiple alleles that may exist at a genetic locus or region on a chromosome. Most of the markers will use the standardized NCBI rs# (reference SNP cluster id) that can be searched for in dbSNP, but others have "i-ids" (they start with i), which are internal to 23andMe and will not exist in dbSNP. Marker data correlates to the GRCh37 human reference genome.
+	</div>
+
+<!--    <div class="row"> -->
+<!-- <div class="col-xs-8 col-xs-offset-0"> -->
+<!--      <div class="col-6 col-md-4"> -->
+		    <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    	<span id="search_concept">Filter by</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#gene_name" data-toggle="tooltip" data-placement="top" title="The gene name parameter will return a list of markers for that gene.">Gene name</a></li>
+                      <li><a href="#accession_id" data-toggle="tooltip" data-placement="top" title="The accession id parameter will return a list of markers on that chromosome.">Accession ID</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="search_param" value="all" id="search_param">
+                <input type="text" class="form-control" name="searchTerm" placeholder="Search term...">
+                <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" id="searchBtn">Search</button>
+                </span>
+            </div>
+
+            <!-- info icon -->
+						<!--
+						<div class="col-12"><span class="glyphicon glyphicon-info-sign pull-right" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Most of the markers will use the standardized NCBI rs# (reference SNP cluster id) that can be searched for in dbSNP, but others have "i-ids" (they start with i), which are internal to 23andMe and will not exist in dbSNP. Marker data correlates to the GRCh37 human reference genome."></span></div>
+					-->
+   <!--  </div> -->
+  <!-- </div> -->
+
+	<br></br>
+	<div class="alert alert-info" id="noresultsalert" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	Sorry, no results were returned for your query. Please try another search.</div>
+</div>
+
+
+<style>
+.tooltip-inner {
+    max-width: 300px;
+    /* If max-width does not work, try using width instead */
+    width: 300px;
+}
+</style>
+
+
+<br></br>
+
+
+
+
+<!-- renders gene name results -->
+<div class="container genenames" data-bind="foreach: KOMarkersResponseArray" id="markersDisplay">
+  <div class="list-group">
+    <a class="list-group-item active"><b>SNP ID: </b><b data-bind="text: id"></b></a>
+    <a class="list-group-item"><b>Start: </b><b data-bind="text: start"></b></a>
+    <a class="list-group-item"><b>End: </b><b data-bind="text: end"></b></a>
+		<!-- need tabindex="0", role="button", and data-trigger="focus" to allow for dismissible popover with next click -->
+		<a class="list-group-item"><b>Accession Id: </b><b data-bind="text: accession_id"></b></a>
+    <a tabindex="0" class="list-group-item" data-toggle="popover" role="button" data-trigger="focus" title="Platform Labels" data-placement="bottom" data-bind="attr: { 'data-content': platform_labels_string }"><b>Variants => </b>allele: <b data-bind="text: allele_0"></b>, </b>allele: <b data-bind="text: allele_1"></b></a>
+  </div>
+</div>
+
+<!-- to add delay attribute to tooltips use   data-delay='{ "show": "2000", "hide": "2000"}' -->
